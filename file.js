@@ -59,7 +59,7 @@ let useful = {
         "G": "C",
         "C": "G"
     }
-}
+};
 
 function fact(n) {
     return n > 1 ? fact(n - 1) * n : 1
@@ -200,7 +200,6 @@ function grph(str) {
         let d = row.substr(row.indexOf('\n')).replace('\n', '').trim();
         return {name: row.substring(0, row.indexOf('\n')), data: d}
     });
-    // console.log(data);
     data.forEach(elem1 => {
         data.forEach(elem2 => {
             if (elem1.name !== elem2.name) {
@@ -209,7 +208,7 @@ function grph(str) {
                 }
             }
         })
-    })
+    });
     console.log(result.join('\n'))
 }
 
@@ -221,7 +220,73 @@ function ba3b(str) {
     console.log(result);
 }
 
+let arr;
+let acc = '';
+function long(str) {
+    let data = str.split('>').filter(s => s).map(s => {
+        [_, ...s] = s.split('\n').map(e => e.trim());
+        return s.join('');
+    })
+
+    console.log(data);
+    arr = data;
+    console.log(find_overlaps());
+    console.log(acc);
+}
+
+function  find_overlaps() {
+    console.log('------------------------',arr, acc);
+    if (arr.length == 0) {
+        return acc;
+    } else if (acc.length ==0) {
+        acc = arr.shift();
+        return find_overlaps(acc);
+    } else {
+        for (let i = 0; i < arr.length; i++) {
+            let a = arr[i];
+            let len = a.length;
+            console.log(len, a);
+            for (let p = len - 1; p >= 0; p--) {
+
+                let q = len - p;
+                let suff = a.substr(0, p)
+                let pref = a.slice(q);
+                console.log(p, q, acc, pref, acc.startsWith(pref), suff, acc.endsWith(suff), a, arr);
+                // console.log(pref, suff);
+                // console.log(acc.startsWith(pref), acc.endsWith(suff));
+                if (acc.endsWith(suff) && suff) {
+                    arr.splice(i, 1);
+                    acc = acc + a.substr(p);
+                    return find_overlaps()
+                }
+                if (acc.startsWith(pref) && pref) {
+                    arr.splice(i, 1)
+                    acc = a.substr(0, q) + acc;
+                    return find_overlaps()
+                }
+                // ATTAGACCTGCCGGAAGACCTGCCGGAATAC
+                // ATTAGACCTGCCGGAATAC
+                // console.log(p, q, acc,
+                //     a.substr(0, p), acc.endsWith(a.substr(0, p)),
+                //     a.slice(q), acc.endsWith(a.slice(q)))
+                // if (a.substr(0, p) && acc.startsWith(a.substr(0, p))) {
+                //     // console.log('-----------',a.substr(p), acc)
+                //     arr.splice(i, 1);
+                //     acc = a.substr(p) + acc;
+                //     return find_overlaps()
+                // }
+                // if (a.slice(q) && acc.endsWith(a.slice(q))) {
+                //     // console.log('-----------',a.slice(q), acc)
+                //     arr.splice(i, 1);
+                //     acc = acc + a.slice(q)
+                //     return find_overlaps();
+                // }
+            }
+        }
+    }
+}
+
 
 fs.readFile('tmp.txt', (err, data) => {
-    ba3b(data.toString());
+    long(data.toString());
 });
