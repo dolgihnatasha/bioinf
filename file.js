@@ -214,7 +214,14 @@ function grph(str) {
 }
 
 
+function ba3b(str) {
+    let [result, ...strings] = str.split('\n').filter(s => s.length).map(s => s.trim());
+
+    strings.forEach(s => result +=s[s.length - 1]);
+    console.log(result);
+}
+
 
 fs.readFile('tmp.txt', (err, data) => {
-    grph(data.toString())
+    ba3b(data.toString());
 });
