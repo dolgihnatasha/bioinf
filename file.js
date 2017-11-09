@@ -86,18 +86,22 @@ function subs(str) {
     console.log(result.join(' '))
 }
 
-function hamm(str) {
+function hamm(str1, str2) {
 
-    let [str1, str2] = str.split('\n');
-    str1 = str1.trim();
-    str2 = str2.trim();
+    // let [str1, str2] = str.split('\n');
+    // str1 = str1.trim();
+    // str2 = str2.trim();
     let count = 0;
+    // let count_rev = 0;
+    // let str2_rev = rev_comp(str2);
 
     for (let i = 0; i < str1.length; i++) {
         count += str1[i] !== str2[i];
+        // count_rev += str1 !== str2_rev[i];
     }
 
-    console.log(count)
+    return count;
+    // return min(count, count_rev);
 }
 
 function swap(a, i, j) {
@@ -221,7 +225,227 @@ function ba3b(str) {
     console.log(result);
 }
 
+function long(str) {
+    let data = str.split('>').filter(s=>s).map(s=>{
+        [_, ...s] = s.split('\n').map(e=> e.trim());
+        return s.join('');
+    });
+    data.sort((s1, s2)=> s2.length - s1.length);
+    // console.log(data);
 
-fs.readFile('tmp.txt', (err, data) => {
-    ba3b(data.toString());
+
+    let result = data.shift();
+    let count = data.length;
+    while (data.length > 0 && count > 0) {
+        let len_ar = data.map(s => s.length);
+        // console.log(len_ar);
+        loop1:
+            for (var i = len_ar.shift() - 1; i > 0; i--) {
+                // console.log(i);
+                let pref_ar = data.map(e => e.substring(e.length-i))
+                let suff_ar = data.map(e => e.substring(0, i))
+                // data.forEach(e => console.log(e.length-i, e.substring(e.length-i), result, e.substring(0, i)))
+                for (let j = 0; j < pref_ar.length; j++) {
+                    // let pref = pref_ar[j];
+                    let pref = data[j]
+                    let suff = suff_ar[j];
+                    if (result.startsWith(pref)) {
+                        result = data[j].substring(0, data[j].length - i) + result;
+                        data.splice(i, 1);
+                        count--;
+                        break loop1;
+                    }
+                    if (result.endsWith(suff)) {
+                        result = result + data[j].substring(i);
+                        data.splice(i, 1);
+                        count --;
+                        break loop1;
+                    }
+                }
+
+            }
+    }
+    console.log(result)
+}
+
+
+function corr(str) {
+    let data = str.split('>').filter(s=>s).map(s=>{
+        [_, ...s] = s.split('\n').map(e=> e.trim());
+        return s.join('');
+    });
+    let data_copy = data.slice();
+    let correct = [];
+
+    while (data.length > 0) {
+        let s = data.shift();
+        let s_rev = rev_comp(s);
+        for (let i = 0; i < data.length; i++) {
+            let d = hamm(s, data[i]);
+            let d_rev = hamm(s_rev, data[i]);
+            if (Math.min(d, d_rev) === 0) {
+                correct.push(s)
+            }
+        }
+    }
+    correct = [...new Set(correct)];
+    data_copy.forEach(s => {
+        let s_rev = rev_comp(s);
+        for (let i = 0; i < correct.length; i++) {
+            let d = hamm(s, correct[i]);
+            let d_rev = hamm(s_rev, correct[i]);
+            if (d === 1) {
+                console.log(s + '->' + correct[i]);
+                return;
+            }
+            if (d_rev === 1) {
+                console.log(s + '->' + rev_comp(correct[i]))
+            }
+        }
+    })
+}
+
+function ba3d(str) {
+    let [n, text] = str.split('\n').map(s => s.trim());
+    n = parseInt(n);
+    let v = [];
+    for (let i = 0; i < str.length - n; i++) {
+        let s = text.substr(i, n);
+        s.length === n  ? v.push([s.substr(0, n-1), s.substr(1)]) : '';
+    }
+    // console.log(v)
+    while (v.length > 0) {
+        let [n1, n2] = v.shift();
+        let left = [n2];
+        let i = 0;
+        while (i < v.length) {
+            if (n1 === v[i][0]) {
+                left.push(v[i][1]);
+                v.splice(i, 1)
+            } else {
+                i++;
+            }
+        }
+        console.log(n1, '->', left.join(','))
+    }
+}
+
+function ba3e(str) {
+    let v = str.split('\n').filter(e=>e).map(e => {
+        e = e.trim();
+        return [e.substr(0, e.length - 1), e.substr(1)]
+    });
+    while (v.length > 0) {
+        let [n1, n2] = v.shift();
+        let left = [n2];
+        let i = 0;
+        while (i < v.length) {
+            if (n1 === v[i][0]) {
+                left.push(v[i][1]);
+                v.splice(i, 1)
+            } else {
+                i++;
+            }
+        }
+        console.log(n1, '->', left.join(','))
+    }
+
+}
+
+function ba3f(str) {
+    let rebra = str.split('\n').filter(e=>e).reduce((res, row) => {
+        let [a, bs] = row.split('->');
+        a = a.trim();
+        bs = bs.split(',').map(b=>b.trim());
+        bs.map(b=> res.push([a, b]))
+        // res[a] = bs;
+        return res;
+    }, []);
+    // console.log(rebra);
+    let result = [];
+    console.log(find_euler(rebra).reverse().join(' -> '))
+
+}
+
+function find_euler(graph) {
+    let stack = [];
+    let tour = [];
+
+    stack.push(graph[0][0]);
+
+    while (stack.length > 0) {
+        // console.log(stack, graph, tour)
+        // console.log()
+        let v = stack[stack.length - 1];
+
+
+        let d = get_degr(v, graph);
+
+        if (d === 0) {
+            stack.pop();
+            tour.push(v)
+        } else {
+            let [index, edge] = get_ind_edge(v, graph);
+            // console.log(v, d, index, edge)
+            graph.splice(index, 1);
+            stack.push(v === edge[0] ? edge[1] : edge[0])
+        }
+
+    }
+    return tour;
+}
+
+function get_degr(v, graph) {
+    let d = 0;
+    for (let [x, y] of graph) {
+        if (x === v) {
+            d += 1
+        }
+    }
+    return d;
+}
+
+function get_ind_edge(v, graph) {
+
+    for (let i = 0; i < graph.length; i++) {
+        if (v === graph[i][0] || v === graph[i][1]) {
+            return [i, graph[i]]
+        }
+    }
+}
+
+// while (rebra.length > 0) {
+//     let v = result[result.length - 1];
+//
+//     loop:
+//         for (let i = 0; i < rebra.length; i++) {
+//             console.log(v, rebra[i][0], result)
+//             if (rebra[i][0] == v) {
+//                 result.push(rebra[i][1]);
+//                 rebra.splice(i, 1);
+//                 break loop;
+//             }
+//         }
+// }
+// function findEulerPath(v) {
+//     if (rebra[v]) {
+//
+//         // console.log(v)
+//         let u = rebra[v].slice();
+//         delete rebra[v];
+//         u.forEach(findEulerPath);
+//     }
+//     // console.log(v, result.length, result, JSON.stringify(rebra))
+//     result.push(v)
+//
+//     return;
+// }
+// findEulerPath(0)
+//
+// console.log(result.reverse().join(' -> '))
+
+
+// fs.readFile('tmp.txt', (err, data) => {
+fs.readFile('rosalind_ba3f.txt', (err, data) => {
+    ba3f(data.toString());
 });
