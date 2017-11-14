@@ -1140,21 +1140,55 @@ function ba5g(str) {
     console.log(levenshtein(s1, s2))
 }
 
-function  needleman_wunsch(s1, s2, matrix = useful.blosum62) {
+function ba5k(str) {
+    let [s1, s2] = str.split('\n').map(e => e.trim());
+    console.log(middleColumn(s1, s2))
+}
 
+function middleColumn(v, w, indel) {
+    let S = [[],[]];
+    for(let i = 0; i <= v.length; ++i) {
+        S[0][i] = i * -1 * indel;
+    }
+    S[1][0] = indel;
+    let backtrack = [];
+    for(var j = 1; j <= w.length/2; ++j) {
+        for(var i = 0; i <= v.length; ++i) {
+            if(i == 0) {
+                S[1][i] = -1*j*indel;
+            }
+            else {
+                let opt1 = S[0][i-1] + useful.blosum62[v[i-1]][w[j-1]];
+                let opt2 = S[0][i] - indel;
+                let opt3 = S[1][i-1] - indel;
+                S[1][i] = opt1;
+                backtrack[i] = 0;
+                if(opt2 > S[1][i]) {
+                    S[1][i] = opt2;
+                    backtrack[i] = 1;
+                }
+                if(opt3 > S[1][i]) {
+                    S[1][i] = opt3;
+                    backtrack[i] = 2;
+                }
+            }
+        }
+        if(j != w.length/2) {
+            S[0] = S[1];
+            S[1] = [];
+        }
+    }
+    console.log(S``,backtrack);
 }
 
 function ba5e(str) {
     let [s1, s2] = str.split('\n').map(e => e.trim());
-    allign_prot(s1, s2);
+    allign_prot_go_ge(s1, s2);
 }
 
 function allign_prot(s,  t, indel = 5) {
-    // Uses BLOSUM62. PASS indel AS POSITIVE INTEGER, NOT NEGATIVE!
-    let S = [];
-    let opt = []; // 1 = right, 2 = down, 3 = diag
-    S[0] = [];
-    opt[0] = [];
+    let S = [[]];
+    let opt = [[]]; // 1 = right, 2 = down, 3 = diag
     S[0][0] = 0;
     for(let i = 1; i <= s.length; ++i) {
         S[i] = [];
@@ -1224,8 +1258,139 @@ function allign_prot(s,  t, indel = 5) {
     return out[0];
 }
 
+function allign_prot_go_ge(s, t, go = 11, ge = 1) {
+    // Uses BLOSUM62. PASS go AND ge AS POSITIVE INTEGER, NOT NEGATIVE!
+    let S = [[[]],[[]],[[]]]; // S[0] = lower, S[1] = middle, S[2] = upper
+    let opt = [[[]],[[]],[[]]]; // 1 = right, 2 = down, 3 = diag
+    for(let i = 1; i <= s.length; ++i) {
+        S[0][i] = [];
+        S[1][i] = [];
+        S[2][i] = [];
+        opt[0][i] = [];
+        opt[1][i] = [];
+        opt[2][i] = [];
+        S[0][i][0] =  (go + (i-1)*ge);
+        S[1][i][0] =  (go + (i-1)*ge);
+        S[2][i][0] = go;
+        opt[0][i][0] = 0;
+        opt[1][i][0] = 0;
+        opt[2][i][0] = 0;
+    }
+    for(let j = 1; j <= t.length; ++j) {
+        S[0][0][j] = go;
+        S[1][0][j] =  (go + (j-1)*ge);
+        S[2][0][j] =  (go + (j-1)*ge);
+        opt[0][0][j] = 1;
+        opt[1][0][j] = 1;
+        opt[2][0][j] = 1;
+    }
+    for(let i = 1; i <= s.length; ++i) {
+        for(let j = 1; j <= t.length; ++j) {
+            let low1 = S[0][i-1][j] - ge;
+            let low2 = S[1][i-1][j] - go;
+            if(low1 > low2) {
+                S[0][i][j] = low1;
+                opt[0][i][j] = 0;
+            }
+            else {
+                S[0][i][j] = low2;
+                opt[0][i][j] = 1;
+            }
 
-// fs.readFile('tmp.txt', (err, data) => {
-fs.readFile('rosalind_ba5e.txt', (err, data) => {
-    ba5e(data.toString());
+            let up1 = S[2][i][j-1] - ge;
+            let up2 = S[1][i][j-1] - go;
+            if(up1 > up2) {
+                S[2][i][j] = up1;
+                opt[2][i][j] = 0;
+            }
+            else {
+                S[2][i][j] = up2;
+                opt[2][i][j] = 1;
+            }
+
+            let opt1 = S[0][i][j];
+            let opt2 = S[1][i-1][j-1] + useful.blosum62[s[i-1]][t[j-1]];
+            let opt3 = S[2][i][j];
+            S[1][i][j] = opt1;
+            opt[1][i][j] = 0;
+            if(opt2 > S[1][i][j]) {
+                S[1][i][j] = opt2;
+                opt[1][i][j] = 1;
+            }
+            if(opt3 > S[1][i][j]) {
+                S[1][i][j] = opt3;
+                opt[1][i][j] = 2;
+            }
+        }
+    }
+    let i = s.length;
+    let j = t.length;
+    let bestSIJ = 0;
+    let best = S[0][i][j];
+    if(S[1][i][j] > best) {
+        best = S[1][i][j];
+        bestSIJ = 1;
+    }
+    if(S[2][i][j] > best) {
+        best = S[2][i][j];
+        bestSIJ = 2;
+    }
+    let out = [];
+    out[0] = "" + best;
+    out[1] = "";
+    out[2] = "";
+    while(i > 0 && j > 0) {
+        if(bestSIJ == 0) {
+            if(opt[0][i][j] == 1) {
+                bestSIJ = 1;
+            }
+            out[1] = s[i-- - 1] + out[1];
+            out[2] = '-' + out[2];
+        }
+        else if(bestSIJ == 1) {
+            if(opt[1][i][j] == 0) {
+                bestSIJ = 0;
+            }
+            else if(opt[1][i][j] == 2) {
+                bestSIJ = 2;
+            }
+            else {
+                out[1] = s[i-- - 1] + out[1];
+                out[2] = t[j-- - 1] + out[2];
+            }
+        }
+        else {
+            if(opt[2][i][j] == 1) {
+                bestSIJ = 1;
+            }
+            out[1] = '-' + out[1];
+            out[2] = t[j-- - 1] + out[2];
+        }
+    }
+    if(i > 0) {
+        out[1] = s.substring(0,i) + out[1];
+        let add = "";
+        for(let x = 0; x < i; ++x) {
+            add += '-';
+        }
+        out[2] = add + out[2];
+    }
+    if(j > 0) {
+        out[2] = t.substring(0,j) + out[2];
+        let add = "";
+        for(let x = 0; x < j; ++x) {
+            add += '-';
+        }
+        out[1] = add + out[1];
+    }
+    console.log(out[0]);
+    console.log(out[1]);
+    console.log(out[2]);
+    return out;
+}
+
+
+fs.readFile('tmp.txt', (err, data) => {
+// fs.readFile('rosalind_ba5j.txt', (err, data) => {
+    ba5k(data.toString());
 });
