@@ -684,6 +684,28 @@ let useful = {
             "X": -1,
             "Z": 4
         }
+    },
+    pam250: {
+        A: {A:  2, C: -2, D:  0, E:  0, F: -3, G:  1, H:-1, I: -1, K: -1, L: -2, M: -1, N:  0, P:  1, Q:  0, R: -2, S:  1, T:  1, V:  0, W: -6, Y: -3},
+        C: {A: -2, C: 12, D: -5, E: -5, F: -4, G: -3, H:-3, I: -2, K: -5, L: -6, M: -5, N: -4, P: -3, Q: -5, R: -4, S:  0, T: -2, V: -2, W: -8, Y:  0},
+        D: {A:  0, C: -5, D:  4, E:  3, F: -6, G:  1, H: 1, I: -2, K:  0, L: -4, M: -3, N:  2, P: -1, Q:  2, R: -1, S:  0, T:  0, V: -2, W: -7, Y: -4},
+        E: {A:  0, C: -5, D:  3, E:  4, F: -5, G:  0, H: 1, I: -2, K:  0, L: -3, M: -2, N:  1, P: -1, Q:  2, R: -1, S:  0, T:  0, V: -2, W: -7, Y: -4},
+        F: {A: -3, C: -4, D: -6, E: -5, F:  9, G: -5, H:-2, I:  1, K: -5, L:  2, M:  0, N: -3, P: -5, Q: -5, R: -4, S: -3, T: -3, V: -1, W:  0, Y:  7},
+        G: {A:  1, C: -3, D:  1, E:  0, F: -5, G:  5, H:-2, I: -3, K: -2, L: -4, M: -3, N:  0, P:  0, Q: -1, R: -3, S:  1, T:  0, V: -1, W: -7, Y: -5},
+        H: {A: -1, C: -3, D:  1, E:  1, F: -2, G: -2, H: 6, I: -2, K:  0, L: -2, M: -2, N:  2, P:  0, Q:  3, R:  2, S: -1, T: -1, V: -2, W: -3, Y:  0},
+        I: {A: -1, C: -2, D: -2, E: -2, F:  1, G: -3, H:-2, I:  5, K: -2, L:  2, M:  2, N: -2, P: -2, Q: -2, R: -2, S: -1, T:  0, V:  4, W: -5, Y: -1},
+        K: {A: -1, C: -5, D:  0, E:  0, F: -5, G: -2, H: 0, I: -2, K:  5, L: -3, M:  0, N:  1, P: -1, Q:  1, R:  3, S:  0, T:  0, V: -2, W: -3, Y: -4},
+        L: {A: -2, C: -6, D: -4, E: -3, F:  2, G: -4, H:-2, I:  2, K: -3, L:  6, M:  4, N: -3, P: -3, Q: -2, R: -3, S: -3, T: -2, V:  2, W: -2, Y: -1},
+        M: {A: -1, C: -5, D: -3, E: -2, F:  0, G: -3, H:-2, I:  2, K:  0, L:  4, M:  6, N: -2, P: -2, Q: -1, R:  0, S: -2, T: -1, V:  2, W: -4, Y: -2},
+        N: {A:  0, C: -4, D:  2, E:  1, F: -3, G:  0, H: 2, I: -2, K:  1, L: -3, M: -2, N:  2, P:  0, Q:  1, R:  0, S:  1, T:  0, V: -2, W: -4, Y: -2},
+        P: {A:  1, C: -3, D: -1, E: -1, F: -5, G:  0, H: 0, I: -2, K: -1, L: -3, M: -2, N:  0, P:  6, Q:  0, R:  0, S:  1, T:  0, V: -1, W: -6, Y: -5},
+        Q: {A:  0, C: -5, D:  2, E:  2, F: -5, G: -1, H: 3, I: -2, K:  1, L: -2, M: -1, N:  1, P:  0, Q:  4, R:  1, S: -1, T: -1, V: -2, W: -5, Y: -4},
+        R: {A: -2, C: -4, D: -1, E: -1, F: -4, G: -3, H: 2, I: -2, K:  3, L: -3, M:  0, N:  0, P:  0, Q:  1, R:  6, S:  0, T: -1, V: -2, W:  2, Y: -4},
+        S: {A:  1, C:  0, D:  0, E:  0, F: -3, G:  1, H:-1, I: -1, K:  0, L: -3, M: -2, N:  1, P:  1, Q: -1, R:  0, S:  2, T:  1, V: -1, W: -2, Y: -3},
+        T: {A:  1, C: -2, D:  0, E:  0, F: -3, G:  0, H:-1, I:  0, K:  0, L: -2, M: -1, N:  0, P:  0, Q: -1, R: -1, S:  1, T:  3, V:  0, W: -5, Y: -3},
+        V: {A:  0, C: -2, D: -2, E: -2, F: -1, G: -1, H:-2, I:  4, K: -2, L:  2, M:  2, N: -2, P: -1, Q: -2, R: -2, S: -1, T:  0, V:  4, W: -6, Y: -2},
+        W: {A: -6, C: -8, D: -7, E: -7, F:  0, G: -7, H:-3, I: -5, K: -3, L: -2, M: -4, N: -4, P: -6, Q: -5, R:  2, S: -2, T: -5, V: -6, W: 17, Y:  0},
+        Y: {A: -3, C:  0, D: -4, E: -4, F:  7, G: -5, H: 0, I: -1, K: -4, L: -1, M: -2, N: -2, P: -5, Q: -4, R: -4, S: -3, T: -3, V: -2, W:  0, Y: 10}
     }
 };
 
@@ -855,7 +877,7 @@ function long(str) {
     console.log(acc);
 }
 
-function  find_overlaps() {
+function find_overlaps() {
     console.log('------------------------',arr, acc);
     if (arr.length == 0) {
         return acc;
@@ -1390,7 +1412,249 @@ function allign_prot_go_ge(s, t, go = 11, ge = 1) {
 }
 
 
-fs.readFile('tmp.txt', (err, data) => {
-// fs.readFile('rosalind_ba5j.txt', (err, data) => {
-    ba5k(data.toString());
+function cons(str) {
+    let data = str.split('>').filter(s => s).map(s => {
+        [_, ...s] = s.split('\n').map(e => e.trim());
+        return s.join('');
+    })
+    // console.log(data)
+    consensus(data)
+
+}
+
+function consensus(str_ar) {
+    let profile = {A:[], C: [], G:[], T:[]};
+    for (let i = 0; i < str_ar[0].length; i++) {
+        profile.A.push(0);
+        profile.G.push(0);
+        profile.C.push(0);
+        profile.T.push(0);
+        str_ar.forEach(s => profile[s[i]][i]++)
+    }
+
+    let cons_str = '';
+    for (let i = 0; i< str_ar[0].length; i++) {
+        cons_str += Object.keys(profile).reduce(function(a, b){ return profile[a][i] > profile[b][i] ? a : b });
+    }
+    console.log(cons_str);
+    Object.keys(profile).forEach(key => console.log(key + ':', profile[key].join(' ')));
+}
+
+
+function fib(n, k) {
+    let res = [1, 1];
+    for (let i = 2; i < n; i++) {
+        res.push(res[i-1] + res[i-2] * k)
+    }
+    console.log(res[n - 1])
+}
+
+
+function ba5f(str) {
+    let [s1, s2] = str.split('\n').map(e => e.trim())
+    local_alignment(s1,s2)
+}
+
+function local_alignment(s, t, indel = 5) {
+    let S = [[]];
+    let opt = [[]]; // 1 = right, 2 = down, 3 = diag, 4 = dont move
+    S[0][0] = 0;
+    for(let i = 1; i <= s.length; ++i) {
+        S[i] = [];
+        opt[i] = [];
+        S[i][0] = 0;
+        opt[i][0] = 4;
+    }
+    for(let j = 1; j <= t.length; ++j) {
+        S[0][j] = 0;
+        opt[0][j] = 4;
+    }
+    for(let i = 1; i <= s.length; ++i) {
+        for(let j = 1; j <= t.length; ++j) {
+            let opt1 = S[i][j-1] - indel; // right
+            let opt2 = S[i-1][j] - indel; // down
+            let opt3 = S[i-1][j-1] + useful.pam250[s[i-1]][t[j-1]]; // diag
+            let opt4 = 0;
+            S[i][j] = opt1;
+            opt[i][j] = 1;
+            if(opt2 > S[i][j]) {
+                S[i][j] = opt2;
+                opt[i][j] = 2;
+            }
+            if(opt3 > S[i][j]) {
+                S[i][j] = opt3;
+                opt[i][j] = 3;
+            }
+            if (opt4 > S[i][j]) {
+                S[i][j] = opt4;
+                opt[i][j] = 4;
+            }
+
+        }
+    }
+    // console.log(S)
+    let {val: count, i, j} = max_i_j(S);
+    let out = ['', ''];
+    while(i > 0 && j > 0) {
+        if(opt[i][j] === 1) { // right
+            out[0] = '-' + out[0];
+            out[1] = t[j-- - 1] + out[1];
+        }
+        else if(opt[i][j] === 2) { // down
+            out[0] = s[i-- - 1] + out[0];
+            out[1] = '-' + out[1];
+        }
+        else if(opt[i][j] === 3) { // diag
+            out[0] = s[i-- - 1] + out[0];
+            out[1] = t[j-- - 1] + out[1];
+        }
+        else if(opt[i][j] === 4) { // stop
+            break;
+        }
+    }
+    console.log(count);
+    console.log(out[0]);
+    console.log(out[1]);
+    return out[0];
+}
+
+function max_i_j(matrix) {
+    return matrix.reduce((acc, row, i) => {
+        let row_res = row.reduce((acc2, e, j) =>  e > acc2.val ? {val: e, ind: j} : acc2, {val: -100})
+        return row_res.val > acc.val ? {val: row_res.val, i, j: row_res.ind} : acc
+    }, {val: -100})
+}
+
+function ba5m(str) {
+    let [s1, s2, s3] = str.split('\n').map(e => e.trim());
+    mul_alignment(s1, s2, s3)
+}
+
+function mul_alignment(r, s, t) {
+    let S = [[[]]];
+    let opt = [];
+    for(let i = 0; i <= r.length; ++i) {
+        S[i] = [];
+        opt[i] = [];
+        for(let j = 0; j <= s.length; ++j) {
+            S[i][j] = [];
+            opt[i][j] = [];
+            for (let k = 0; k <= t.length; ++k) {
+                S[i][j][k] = 0;
+                opt[i][j][k] = -1;
+            }
+        }
+    }
+
+    // let S = new let[r.length+1][s.length+1][t.length+1];
+    // let opt = new let[r.length+1][s.length+1][t.length+1];
+    for(let i = 1; i <= r.length; ++i) {
+        for(let j = 1; j <= s.length; ++j) {
+            for(let k = 1; k <= t.length; ++k) {
+                let opt1 = S[i-1][j][k];     // (r_i, -,   -)
+                let opt2 = S[i][j-1][k];     // (-,   s_j, -)
+                let opt3 = S[i][j][k-1];     // (-,   -,   t_k)
+                let opt4 = S[i-1][j-1][k];   // (r_i, s_j, -)
+                let opt5 = S[i-1][j][k-1];   // (r_i, -,   t_k)
+                let opt6 = S[i][j-1][k-1];   // (-,   s_j, t_k)
+                let opt7 = S[i-1][j-1][k-1]; // (r_i, s_j, t_k)
+                if(r[i-1] == s[j-1] && s[j-1] == t[k-1]) {
+                    ++opt7;
+                }
+
+                S[i][j][k] = opt1;
+                opt[i][j][k] = 1;
+                if(opt2 > S[i][j][k]) {
+                    S[i][j][k] = opt2;
+                    opt[i][j][k] = 2;
+                }
+                if(opt3 > S[i][j][k]) {
+                    S[i][j][k] = opt3;
+                    opt[i][j][k] = 3;
+                }
+                if(opt4 > S[i][j][k]) {
+                    S[i][j][k] = opt4;
+                    opt[i][j][k] = 4;
+                }
+                if(opt5 > S[i][j][k]) {
+                    S[i][j][k] = opt5;
+                    opt[i][j][k] = 5;
+                }
+                if(opt6 > S[i][j][k]) {
+                    S[i][j][k] = opt6;
+                    opt[i][j][k] = 6;
+                }
+                if(opt7 > S[i][j][k]) {
+                    S[i][j][k] = opt7;
+                    opt[i][j][k] = 7;
+                }
+            }
+        }
+    }
+    let out = [];
+    let i = r.length;
+    let j = s.length;
+    let k = t.length;
+    out[0] = "" + S[i][j][k];
+    out[1] = "";
+    out[2] = "";
+    out[3] = "";
+    while(i > 0 && j > 0 && k > 0) {
+        switch(opt[i][j][k]) {
+            case 1: out[1] = r.charAt(i-- - 1) + out[1];
+                out[2] = '-' + out[2];
+                out[3] = '-' + out[3];
+                break;
+            case 2: out[1] = '-' + out[1];
+                out[2] = s.charAt(j-- - 1) + out[2];
+                out[3] = '-' + out[3];
+                break;
+            case 3: out[1] = '-' + out[1];
+                out[2] = '-' + out[2];
+                out[3] = t.charAt(k-- - 1) + out[3];
+                break;
+            case 4: out[1] = r.charAt(i-- - 1) + out[1];
+                out[2] = s.charAt(j-- - 1) + out[2];
+                out[3] = '-' + out[3];
+                break;
+            case 5: out[1] = r.charAt(i-- - 1) + out[1];
+                out[2] = '-' + out[2];
+                out[3] = t.charAt(k-- - 1) + out[3];
+                break;
+            case 6: out[1] = '-' + out[1];
+                out[2] = s.charAt(j-- - 1) + out[2];
+                out[3] = t.charAt(k-- - 1) + out[3];
+                break;
+            case 7: out[1] = r.charAt(i-- - 1) + out[1];
+                out[2] = s.charAt(j-- - 1) + out[2];
+                out[3] = t.charAt(k-- - 1) + out[3];
+                break;
+        }
+    }
+    while(i > 0) {
+        out[1] = r.charAt(i-- - 1) + out[1];
+        out[2] = '-' + out[2];
+        out[3] = '-' + out[3];
+    }
+    while(j > 0) {
+        out[1] = '-' + out[1];
+        out[2] = s.charAt(j-- - 1) + out[2];
+        out[3] = '-' + out[3];
+    }
+    while(k > 0) {
+        out[1] = '-' + out[1];
+        out[2] = '-' + out[2];
+        out[3] = t.charAt(k-- - 1) + out[3];
+    }
+    console.log(out[0]);
+    console.log(out[1]);
+    console.log(out[2]);
+    console.log(out[3]);
+    // return out;
+}
+
+
+// fs.readFile('tmp.txt', (err, data) => {
+fs.readFile('rosalind_ba5m.txt', (err, data) => {
+    ba5m(data.toString());
 });
