@@ -1654,7 +1654,120 @@ function mul_alignment(r, s, t) {
 }
 
 
+
+function ba10a(str) {
+    //parsing input
+    let [[p], _, states, _1, _2, ...rows] = str.split('\n').map(r => r.split(/\s+/).filter(r => r.length)). filter(r => r.length);
+
+    // parsing table
+    let tr = {};
+    rows.forEach((row, i) => {
+        let [r] = row.splice(0, 1);
+        tr[r] = {};
+        states.forEach((st, j) => {tr[r][st] = row[j]})
+    });
+
+    let s = Math.log2(0.5);
+    let [_f, ..._p] = p;
+    _p.join('');
+    _p.forEach((pi, i) => {
+        s+= Math.log2(tr[p[i]][pi])
+    });
+
+    console.log(Math.pow(2, s))
+}
+
+function ba10b(str) {
+    let [[x],_3, alph, _4, [p], _, states, _1, _2, ...rows] = str.split('\n').map(r => r.split(/\s+/).filter(r => r.length)). filter(r => r.length);
+    console.log(x, alph, p, states)
+    console.log(rows)
+    let e = {};
+    rows.forEach((row, i) => {
+        let [r] = row.splice(0, 1);
+        e[r] = {};
+        alph.forEach((st, j) => {e[r][st] = row[j]})
+    });
+    // console.log(e)
+    let s = 1;
+    p = p.split('');
+    p.forEach((pi, i) => {
+        s *= e[pi][x[i]]
+    })
+    console.log(s)
+}
+
+function ba10c(str) {
+    // reading data
+    let [x, alph, states, tr_table, e_table] = str.split('--------').map(r => r.trim());
+    alph = alph.split(/\s+/);
+    states = states.split(/\s+/);
+    let _, _x;
+    [_, ...tr_table] = tr_table.split('\n');
+    [_, ...e_table] = e_table.split('\n');
+
+
+    // building tr & e
+    let tr = {};
+    let e = {};
+    tr_table.forEach(row => {
+        row = row.split(/\s+/);
+        let [r] = row.splice(0, 1);
+        tr[r] = {};
+        states.forEach((st, j) => {tr[r][st] = parseFloat(row[j])})
+    });
+    e_table.forEach(row => {
+        row = row.split(/\s+/);
+        let [r] = row.splice(0, 1);
+        e[r] = {};
+        alph.forEach((st, j) => {e[r][st] = parseFloat(row[j])})
+    });
+
+
+    // searching path
+
+    let path = {}, score = {}, curr_path = {}, curr_score = {};
+    states.forEach(st => {
+        curr_score[st] = Math.log2(e[st][x[0]]) + Math.log2(1 / states.length);
+        curr_path[st] = st;
+    });
+    path = copy(curr_path);
+    score = copy(curr_score);
+
+    [_, ..._x] = x.split('');
+    _x.forEach(xi => {
+        curr_score = {};
+        states.forEach(st_to => {
+            let max_score_to_st = -10000000000000;
+            let p = '';
+            states.forEach(st_from => {
+                let score_from_to = Math.log2(e[st_to][xi]) + Math.log2(tr[st_from][st_to]) + score[st_from];
+                if (score_from_to > max_score_to_st) {
+                    max_score_to_st = score_from_to;
+                    p = st_from;
+                }
+            });
+            curr_score[st_to] = max_score_to_st;
+            curr_path[st_to] = path[p] + st_to;
+        });
+        path = copy(curr_path);
+        score = copy(curr_score);
+    });
+
+    let key = max_key(score);
+    console.log(path[key])
+}
+
+function max_key(obj) {
+    return Object.keys(obj).reduce(function(a, b){ return obj[a] > obj[b] ? a : b });
+}
+
+function copy(obj) {
+    return Object.assign({}, obj);
+}
+
+
 // fs.readFile('tmp.txt', (err, data) => {
-fs.readFile('rosalind_ba5m.txt', (err, data) => {
-    ba5m(data.toString());
+fs.readFile('rosalind_ba10c.txt', (err, data) => {
+    ba10c(data.toString());
 });
+
