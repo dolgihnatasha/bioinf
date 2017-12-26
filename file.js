@@ -1200,7 +1200,7 @@ function middleColumn(v, w, indel) {
             S[1] = [];
         }
     }
-    console.log(S``,backtrack);
+    // console.log(S``,backtrack);
 }
 
 function ba5e(str) {
