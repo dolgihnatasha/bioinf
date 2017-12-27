@@ -1766,8 +1766,29 @@ function copy(obj) {
 }
 
 
-// fs.readFile('tmp.txt', (err, data) => {
-fs.readFile('rosalind_ba10c.txt', (err, data) => {
-    ba10c(data.toString());
+function ba7b(str) {
+    let [n, j, ...d] = str.split('\n');
+    d = d.map(row => {
+        return row.split('\t').map(k => parseInt(k))
+    });
+    console.log(n, j, d);
+    let limb_j = 1000, limb;
+    for (let i = 0; i < n; i++) {
+        for (let k = 0; k < n; k++) {
+            if (i != j && k != j){
+                limb = (d[i][j] + d[j][k] - d[i][k]) / 2;
+                if (limb < limb_j) {
+                    limb_j = limb
+                }
+            }
+        }
+    }
+    console.log(limb_j)
+}
+
+
+fs.readFile('tmp.txt', (err, data) => {
+// fs.readFile('rosalind_ba10c.txt', (err, data) => {
+    ba7b(data.toString());
 });
 
